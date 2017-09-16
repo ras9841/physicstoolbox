@@ -8,7 +8,10 @@ class Scalar(float, Tensor):
     def __str__(self):
         return str(self._value)+" "+str(self.units)
     def __eq__(self, s):
-        return self._value == s
+        if type(s) is Scalar:
+            return self._value == s._value and self.units == s.units
+        else:
+            return self._value == s
     ### MAGIC MATH METHODS ###
     def __add__(self, s):
         if self.units is not s.units:
